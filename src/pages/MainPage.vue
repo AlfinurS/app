@@ -1,67 +1,264 @@
 <template>
   <section class="page">
-    <h2 class="page__title">Ray Driving Theory</h2>
+    <div class="page__bar">
+      <h2 class="page__title">Ray Driving Theory</h2>
+      <div class="page__icon-wrapp">
+        <div class="icon__wrapper icon__wrapper--crown">
+          <iconCrown />
+        </div>
+        <div class="icon__wrapper icon__wrapper--fire">
+          <iconFire />
+          <span class="page__icon-text">13</span>
+        </div>
+      </div>
+    </div>
 
-    <iconCrown />
-    <iconFire />
-    <p class="page__text">13</p>
-    <div class="page__text-wrapp">
-      <p class="page__header">Learning</p>
+    <div class="page__hero">
+      <div class="page__hero-wrapp">
+        <iconCap />
+        <div class="page__text-wrapp">
+          <span class="page__header">Learning</span>
+          <span class="page__text-second">Category В</span>
+        </div>
+        <iconArrow />
+      </div>
+      <p class="page__info">
+        {{ form.activeCount }} questions out of
+        {{ form.questions.length }} passed
+      </p>
+      <ProgressBar
+        :count="form.questions.length"
+        :activeCount="form.activeCount"
+      />
+    </div>
+    <div class="page__card-wrapp">
+      <div class="page__card">
+        <div><iconLayer /></div>
+        <p class="page__card-name">DVSA Exam</p>
+      </div>
+
+      <div class="page__card">
+        <div><iconRocket /></div>
+        <p class="page__card-name">Express mode</p>
+      </div>
+
+      <div class="page__card">
+        <div><iconPlay /></div>
+        <p class="page__card-name">Hazard perception</p>
+      </div>
+      <div class="page__card">
+        <div><iconRoad /></div>
+        <p class="page__card-name">Road signs</p>
+      </div>
+      <div class="page__card page__card-width">
+        <div><iconGame /></div>
+        <span class="page__card-name">Multiplayer Learning</span>
+      </div>
+    </div>
+
+    <div class="page__item-wrapp">
+      <div class="page__item">
+        <div class="page__item-wrapper"><iconPen /></div>
+        <p class="page__text">Mistakes</p>
+      </div>
+      <div class="page__item">
+        <div class="page__item-wrapper"><iconStatistic /></div>
+        <p class="page__text">Statistics</p>
+      </div>
+      <div class="page__item">
+        <div class="page__item-wrapper"><iconBook /></div>
+        <p class="page__text">Highway Code</p>
+      </div>
+      <div class="page__item">
+        <div class="page__item-wrapper"><iconMark /></div>
+        <span class="page__text">Favorites</span>
+      </div>
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import iconCrown from "@/components/icons/iconCrown.vue";
 import iconFire from "@/components/icons/iconFire.vue";
+import iconCap from "@/components/icons/iconCap.vue";
+import iconArrow from "@/components/icons/iconArrow.vue";
+import iconLayer from "@/components/icons/iconLayer.vue";
+import iconRocket from "@/components/icons/iconRocket.vue";
+import iconPlay from "@/components/icons/iconPlay.vue";
+import iconRoad from "@/components/icons/iconRoad.vue";
+import iconGame from "@/components/icons/iconGame.vue";
+import iconPen from "@/components/icons/iconPen.vue";
+import iconStatistic from "@/components/icons/iconStatistic.vue";
+import iconBook from "@/components/icons/iconBook.vue";
+import iconMark from "@/components/icons/iconBook.vue";
+import ProgressBar from "@/components/ProgressBar.vue";
+
+type formType = {
+  questions: questionType[];
+  activeCount: number;
+};
+
+type questionType = {
+  id: number;
+};
+
+const initQuestions = (): questionType[] => [
+  { id: 1 },
+  { id: 2 },
+  { id: 3 },
+  { id: 4 },
+  { id: 5 },
+  { id: 6 },
+  { id: 7 },
+  { id: 8 },
+  { id: 9 },
+  { id: 10 },
+  { id: 11 },
+  { id: 12 },
+  { id: 13 },
+  { id: 14 },
+  { id: 15 },
+  { id: 16 },
+  { id: 17 },
+  { id: 18 },
+  { id: 19 },
+  { id: 20 },
+];
 
 export default defineComponent({
   name: "MainPage",
   components: {
     iconCrown,
     iconFire,
+    iconCap,
+    iconArrow,
+    iconLayer,
+    iconRocket,
+    iconPlay,
+    iconRoad,
+    iconGame,
+    iconPen,
+    iconStatistic,
+    iconBook,
+    iconMark,
+    ProgressBar,
+  },
+  setup() {
+    const form: formType = reactive({
+      questions: initQuestions(),
+      activeCount: 10,
+    });
+    return { form };
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .page {
+  &__bar {
+    display: flex;
+    flex-direction: row;
+    padding-top: 60px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
   &__header {
     font-size: 20px;
     font-weight: 600;
     line-height: 26px;
-    color: #2c2d2e;
-    text-align: center;
-    margin-bottom: 16px;
-    margin-top: 16px;
   }
   &__title {
     font-size: 18px;
     font-weight: 500;
     line-height: 26px;
-    color: #2c2d2e;
     text-align: center;
-    margin-bottom: 16px;
+  }
+  &__info {
     margin-top: 16px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 20px;
   }
   &__text {
-    color: #c1c2c7;
-    font-size: 15px;
-    font-style: normal;
+    font-size: 14px;
     font-weight: 400;
-    line-height: normal;
+    line-height: 20px;
     text-align: center;
     margin-bottom: 10px;
     margin-top: 10px;
-    max-width: 205px;
-    &-notFound {
-      margin-top: 56px;
+    &-second {
+      color: #87898f;
     }
     &-wrapp {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      margin-left: 16px;
+      margin-right: 75px;
     }
+  }
+  &__hero {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #f3f3f3;
+    background-color: #fff;
+    padding: 24px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    &-wrapp {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  &__icon-text {
+    color: #2c2d2e;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+  }
+  &__card {
+    display: flex;
+    align-items: center;
+    padding: 16px 12px;
+    border-radius: 20px;
+    border: 1px solid #f3f3f3;
+    background-color: #fff;
+    &-name {
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 500;
+      margin-left: 8px;
+    }
+    &-wrapp {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    &-width {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &-wrapp {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 92px;
+    }
+  }
+  &__icon-wrapp {
+    display: flex;
+    flex-direction: row;
   }
   &__list {
     display: grid;
@@ -78,61 +275,20 @@ export default defineComponent({
       margin-bottom: 40px;
     }
   }
-  &__item {
-    display: flex;
-    padding: 15px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 15px;
-    border: 1px solid #f4f5f5;
-    background: white;
-    &-wrapp {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-    &-btn {
-      cursor: pointer;
-    }
-    &-avatar {
-      border-radius: 50%;
-      margin-right: 20px;
-      width: 50px;
-      height: 50px;
-    }
-    &-name {
-      color: #1d1d1d;
-      font-size: 17px;
-      font-weight: 700;
-      line-height: normal;
-      margin-right: 8px;
-    }
+}
+.icon__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #fff;
+  &--crown {
+    padding: 4px 6px;
+    margin-right: 8px;
   }
-  &__block-bottom {
-    position: fixed;
-    box-sizing: border-box;
-    bottom: 0px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 100%;
-    max-width: 1200px;
-    border-radius: 10px 10px 0px 0px;
-    background: #fff;
-    box-shadow: 0px 0px 13px 0px rgba(22, 22, 23, 0.26);
-    padding-left: 25px;
-    padding-right: 25px;
-    &-compensator {
-      height: 80px;
-    }
-  }
-  &__button {
-    margin-bottom: 10px;
-  }
-  &__button-bottom {
-    box-sizing: border-box;
-    margin-top: 10px;
-    margin-bottom: 93px;
+  &--fire {
+    padding-right: 8px;
+    padding-left: 8px;
   }
 }
 </style>

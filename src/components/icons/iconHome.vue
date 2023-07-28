@@ -5,12 +5,11 @@
     :viewBox="viewBox"
     style=""
     fill="none"
-  >
-    <path
+    ><path
       fill-rule="evenodd"
       clip-rule="evenodd"
-      d="M4.375 15C4.375 9.13197 9.13197 4.375 15 4.375C20.868 4.375 25.625 9.13197 25.625 15C25.625 20.868 20.868 25.625 15 25.625C9.13197 25.625 4.375 20.868 4.375 15ZM15.9375 8.75C15.9375 8.23223 15.5178 7.8125 15 7.8125C14.4822 7.8125 14.0625 8.23223 14.0625 8.75V15C14.0625 15.3232 14.229 15.6237 14.5031 15.795L18.2531 18.1387C18.6922 18.4132 19.2706 18.2797 19.545 17.8406C19.8194 17.4016 19.6859 16.8232 19.2469 16.5488L15.9375 14.4804V8.75Z"
-      fill="#EF7958"
+      d="M18 21H14.8C14.634 21 14.5 20.866 14.5 20.7V16.5C14.5 15.119 13.381 14 12 14C10.619 14 9.5 15.119 9.5 16.5V20.7C9.5 20.866 9.36595 21 9.19995 21H6C4 21 3 20 3 18V11.651C3 9.65302 3.52305 9.34608 4.43005 8.58608L10.394 3.58498C11.323 2.80598 12.6781 2.80598 13.6071 3.58498L19.571 8.58608C20.477 9.34608 21.001 9.65302 21.001 11.651V18C21 20 20 21 18 21Z"
+      fill="#FF7355"
     />
   </iconsWrapper>
 </template>
@@ -20,7 +19,7 @@ import { defineComponent } from "vue";
 import iconsWrapper from "@/components/icons/iconsWrapper.vue";
 
 export default defineComponent({
-  name: "iconMeets",
+  name: "iconHome",
   components: {
     iconsWrapper,
   },
@@ -31,15 +30,15 @@ export default defineComponent({
     },
     width: {
       type: [Number, String],
-      default: 30,
+      default: 24,
     },
     height: {
       type: [Number, String],
-      default: 30,
+      default: 24,
     },
     viewBox: {
       type: String,
-      default: "0 0 30 30",
+      default: "0 0 24 24",
     },
   },
 });

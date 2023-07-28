@@ -24,15 +24,15 @@ export default defineComponent({
   props: {
     width: {
       type: [Number, String],
-      default: 24,
+      default: 40,
     },
     height: {
       type: [Number, String],
-      default: 24,
+      default: 40,
     },
     viewBox: {
       type: String,
-      default: "0 0 24 24",
+      default: "0 0 40 40",
     },
     id: {
       type: String,

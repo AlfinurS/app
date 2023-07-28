@@ -1,0 +1,58 @@
+<template>
+  <iconsWrapper
+    :width="width"
+    :height="height"
+    :viewBox="viewBox"
+    style=""
+    fill="none"
+  >
+    <path
+      opacity="0.5"
+      d="M29 58C45.0163 58 58 45.0163 58 29C58 12.9837 45.0163 0 29 0C12.9837 0 0 12.9837 0 29C0 45.0163 12.9837 58 29 58Z"
+      fill="#FFE3DD"
+    />
+    <path
+      opacity="0.4"
+      d="M27.0465 33.0254L21.0173 29.736H21V35.2666C21 36.1973 21.4919 37.0587 22.2799 37.5547C26.7599 40.372 31.2387 40.372 35.7187 37.5547C36.5067 37.0587 36.9987 36.1986 36.9987 35.2666V29.736H36.9814L30.9521 33.0254C29.7361 33.6894 28.2639 33.6894 27.0465 33.0254Z"
+      fill="#FF7355"
+    />
+    <path
+      d="M38.6667 27.228V34.3333C38.6667 34.8853 39.1147 35.3333 39.6667 35.3333C40.2187 35.3333 40.6667 34.8853 40.6667 34.3333V27.228H38.6667Z"
+      fill="#FF7355"
+    />
+    <path
+      d="M39.5821 23.54L30.9541 18.832C29.7368 18.168 28.2646 18.168 27.0459 18.832L18.418 23.54C16.5273 24.5707 16.5273 27.2853 18.418 28.3173L27.0459 33.0253C28.2633 33.6893 29.7355 33.6893 30.9541 33.0253L39.5821 28.3173C40.0727 28.0493 40.43 27.6653 40.666 27.2293C41.338 25.9853 40.9807 24.3027 39.5821 23.54Z"
+      fill="#FF7355"
+    />
+  </iconsWrapper>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import iconsWrapper from "@/components/icons/iconsWrapper.vue";
+
+export default defineComponent({
+  name: "iconCap",
+  components: {
+    iconsWrapper,
+  },
+  props: {
+    iconColor: {
+      type: String,
+      default: "currentColor",
+    },
+    width: {
+      type: [Number, String],
+      default: 58,
+    },
+    height: {
+      type: [Number, String],
+      default: 58,
+    },
+    viewBox: {
+      type: String,
+      default: "0 0 58 58",
+    },
+  },
+});
+</script>
