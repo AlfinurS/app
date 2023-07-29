@@ -9,12 +9,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, provide, ref } from "vue";
 import FooterComponent from "@/components/FooterComponent.vue";
+import questionsConst from "@/assets/questions.json";
+
 export default defineComponent({
   name: "App",
   components: {
     FooterComponent,
+  },
+  setup() {
+    const questions = ref(questionsConst.data);
+    provide("questions", questions);
   },
 });
 </script>

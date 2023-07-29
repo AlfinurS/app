@@ -15,7 +15,7 @@ export default defineComponent({
   &__bar {
     display: flex;
     flex-direction: row;
-    padding-top: 60px;
+    padding-top: 63px;
     justify-content: space-between;
     align-items: center;
     width: 100%;

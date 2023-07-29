@@ -4,7 +4,7 @@
       <div class="footer__item-wrapper footer__item-wrapper--red">
         <iconHome />
       </div>
-      <span>Home</span>
+      <span class="footer__item--red">Home</span>
     </div>
     <div class="footer__item">
       <div class="footer__item-wrapper">

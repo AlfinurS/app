@@ -15,12 +15,16 @@
 
     <div class="page__hero">
       <div class="page__hero-wrapp">
-        <iconCap />
+        <div>
+          <iconCap />
+        </div>
         <div class="page__text-wrapp">
           <span class="page__header">Learning</span>
           <span class="page__text-second">Category В</span>
         </div>
-        <iconArrow />
+        <div>
+          <iconArrow />
+        </div>
       </div>
       <p class="page__info">
         {{ form.activeCount }} questions out of
@@ -78,7 +82,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, inject } from "vue";
 import iconCrown from "@/components/icons/iconCrown.vue";
 import iconFire from "@/components/icons/iconFire.vue";
 import iconCap from "@/components/icons/iconCap.vue";
@@ -91,7 +95,7 @@ import iconGame from "@/components/icons/iconGame.vue";
 import iconPen from "@/components/icons/iconPen.vue";
 import iconStatistic from "@/components/icons/iconStatistic.vue";
 import iconBook from "@/components/icons/iconBook.vue";
-import iconMark from "@/components/icons/iconBook.vue";
+import iconMark from "@/components/icons/iconMark.vue";
 import ProgressBar from "@/components/ProgressBar.vue";
 
 type formType = {
@@ -102,29 +106,6 @@ type formType = {
 type questionType = {
   id: number;
 };
-
-const initQuestions = (): questionType[] => [
-  { id: 1 },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5 },
-  { id: 6 },
-  { id: 7 },
-  { id: 8 },
-  { id: 9 },
-  { id: 10 },
-  { id: 11 },
-  { id: 12 },
-  { id: 13 },
-  { id: 14 },
-  { id: 15 },
-  { id: 16 },
-  { id: 17 },
-  { id: 18 },
-  { id: 19 },
-  { id: 20 },
-];
 
 export default defineComponent({
   name: "MainPage",
@@ -146,9 +127,10 @@ export default defineComponent({
   },
   setup() {
     const form: formType = reactive({
-      questions: initQuestions(),
+      questions: inject("questions") ?? [],
       activeCount: 10,
     });
+
     return { form };
   },
 });
@@ -159,7 +141,7 @@ export default defineComponent({
   &__bar {
     display: flex;
     flex-direction: row;
-    padding-top: 60px;
+    padding-top: 63px;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -186,8 +168,6 @@ export default defineComponent({
     font-weight: 400;
     line-height: 20px;
     text-align: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
     &-second {
       color: #87898f;
     }
@@ -195,7 +175,7 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       margin-left: 16px;
-      margin-right: 75px;
+      width: 100%;
     }
   }
   &__hero {
@@ -205,7 +185,7 @@ export default defineComponent({
     background-color: #fff;
     padding: 24px;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-top: 23px;
     margin-bottom: 8px;
     &-wrapp {
       display: flex;
@@ -213,12 +193,12 @@ export default defineComponent({
       align-items: center;
     }
   }
-
   &__icon-text {
     color: #2c2d2e;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
+    margin-left: 4px;
     text-align: center;
   }
   &__card {
@@ -255,25 +235,13 @@ export default defineComponent({
       grid-template-columns: repeat(4, 1fr);
       margin-bottom: 92px;
     }
+    &-wrapper {
+      margin-bottom: 8px;
+    }
   }
   &__icon-wrapp {
     display: flex;
     flex-direction: row;
-  }
-  &__list {
-    display: grid;
-    grid-template-columns: 1fr;
-    margin-bottom: 10px;
-    @media (min-width: 748px) {
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-    @media (min-width: 1200px) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-    &-wrapper {
-      margin-bottom: 40px;
-    }
   }
 }
 .icon__wrapper {
