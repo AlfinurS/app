@@ -14,14 +14,12 @@
     </div>
 
     <div class="page__hero">
-      <div class="page__hero-wrapp">
+      <div class="page__hero-wrapp" @click="redirectLearning">
         <div>
           <iconCap />
         </div>
         <div class="page__text-wrapp">
-          <router-link :to="{ path: '/learning' }">
-            <span class="page__header">Learning</span>
-          </router-link>
+          <span class="page__header">Learning</span>
           <span class="page__text-second">Category В</span>
         </div>
         <div>
@@ -82,6 +80,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import iconCrown from "@/components/icons/iconCrown.vue";
 import iconFire from "@/components/icons/iconFire.vue";
 import iconCap from "@/components/icons/iconCap.vue";
@@ -118,6 +117,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const router = useRouter();
     const activeQuestions = computed(
       (): number[] => store.getters["common/activeQuestions"]
     );
@@ -129,7 +129,11 @@ export default defineComponent({
       return activeQuestions.value.length;
     });
 
-    return { activeQuestions, questions, activeCount };
+    const redirectLearning = () => {
+      router.push({ name: "LearnPage" });
+    };
+
+    return { activeQuestions, questions, activeCount, redirectLearning };
   },
 });
 </script>
@@ -189,6 +193,7 @@ export default defineComponent({
       display: flex;
       flex-direction: row;
       align-items: center;
+      cursor: pointer;
     }
   }
   &__icon-text {

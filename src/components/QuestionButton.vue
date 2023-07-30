@@ -1,15 +1,22 @@
 <template>
-  <div class="page__number" @click="handleClick">{{ indexProps + 1 }}</div>
+  <div class="page__number" @click="handleClick">
+    {{ indexProps + 1 }}
+    <div class="page__icon-wrapp" v-if="isActive"><iconCheck /></div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, computed } from "vue";
+import { useStore } from "vuex";
 import { questionType } from "@/types/common";
 import { questionConst } from "@/constants/common";
+import iconCheck from "@/components/icons/iconCheck.vue";
 
 export default defineComponent({
   name: "QuestionButton",
-  components: {},
+  components: {
+    iconCheck,
+  },
 
   emits: ["handleClick"],
   props: {
@@ -23,10 +30,19 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const store = useStore();
+    const activeQuestions = computed(
+      (): number[] => store.getters["common/activeQuestions"]
+    );
+    const isActive = computed((): boolean => {
+      if (!props.question.id) return false;
+      return activeQuestions.value.includes(props.question.id);
+    });
+
     const handleClick = () => {
       emit("handleClick", props.question);
     };
-    return { handleClick };
+    return { handleClick, activeQuestions, isActive };
   },
 });
 </script>
@@ -34,6 +50,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .page {
   &__number {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,6 +66,11 @@ export default defineComponent({
     opacity: 0.7;
     transition-duration: 0.2s;
     background-color: #f4f5f5;
+  }
+  &__icon-wrapp {
+    position: absolute;
+    left: 42px;
+    top: -2px;
   }
 }
 </style>

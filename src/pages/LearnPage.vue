@@ -1,11 +1,10 @@
 <template>
   <section class="page">
     <div class="page__bar">
-      <div class="page__icon-wrapp">
-        <router-link class="icon-wrapper" :to="{ path: '/' }">
+      <div class="page__icon-wrapp" @click="redirectMain">
+        <div class="icon-wrapper">
           <iconBack />
-        </router-link>
-
+        </div>
         <h2 class="page__title">Learning</h2>
       </div>
     </div>
@@ -32,6 +31,7 @@ import { useStore } from "vuex";
 import iconBack from "@/components/icons/iconBack.vue";
 import QuestionButton from "@/components/QuestionButton.vue";
 import { questionType } from "@/types/common";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "LearnPage",
@@ -42,6 +42,7 @@ export default defineComponent({
 
   setup() {
     const store = useStore();
+    const router = useRouter();
     const activeQuestions = computed(
       (): number[] => store.getters["common/activeQuestions"]
     );
@@ -63,8 +64,10 @@ export default defineComponent({
         store.dispatch("common/setActiveQuestions", result);
       }
     };
-
-    return { handleClick, activeQuestions, questions };
+    const redirectMain = () => {
+      router.push({ name: "MainPage" });
+    };
+    return { handleClick, activeQuestions, questions, redirectMain };
   },
 });
 </script>
@@ -94,6 +97,7 @@ export default defineComponent({
   &__icon-wrapp {
     display: flex;
     flex-direction: row;
+    cursor: pointer;
   }
   &__text {
     color: #ff7355;
