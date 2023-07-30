@@ -19,7 +19,9 @@
           <iconCap />
         </div>
         <div class="page__text-wrapp">
-          <span class="page__header">Learning</span>
+          <router-link :to="{ path: '/learning' }">
+            <span class="page__header">Learning</span>
+          </router-link>
           <span class="page__text-second">Category В</span>
         </div>
         <div>
@@ -27,13 +29,9 @@
         </div>
       </div>
       <p class="page__info">
-        {{ form.activeCount }} questions out of
-        {{ form.questions.length }} passed
+        {{ activeCount }} questions out of {{ questions.length }} passed
       </p>
-      <ProgressBar
-        :count="form.questions.length"
-        :activeCount="form.activeCount"
-      />
+      <ProgressBar :count="questions.length" :activeCount="activeCount" />
     </div>
     <div class="page__card-wrapp">
       <div class="page__card">
@@ -82,7 +80,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, inject } from "vue";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 import iconCrown from "@/components/icons/iconCrown.vue";
 import iconFire from "@/components/icons/iconFire.vue";
 import iconCap from "@/components/icons/iconCap.vue";
@@ -97,15 +96,7 @@ import iconStatistic from "@/components/icons/iconStatistic.vue";
 import iconBook from "@/components/icons/iconBook.vue";
 import iconMark from "@/components/icons/iconMark.vue";
 import ProgressBar from "@/components/ProgressBar.vue";
-
-type formType = {
-  questions: questionType[];
-  activeCount: number;
-};
-
-type questionType = {
-  id: number;
-};
+import { questionType } from "@/types/common";
 
 export default defineComponent({
   name: "MainPage",
@@ -126,12 +117,19 @@ export default defineComponent({
     ProgressBar,
   },
   setup() {
-    const form: formType = reactive({
-      questions: inject("questions") ?? [],
-      activeCount: 10,
+    const store = useStore();
+    const activeQuestions = computed(
+      (): number[] => store.getters["common/activeQuestions"]
+    );
+    const questions = computed(
+      (): questionType[] => store.getters["common/questions"]
+    );
+
+    const activeCount = computed((): number => {
+      return activeQuestions.value.length;
     });
 
-    return { form };
+    return { activeQuestions, questions, activeCount };
   },
 });
 </script>

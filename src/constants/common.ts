@@ -1,16 +1,6 @@
-import { characterType } from "@/types/common";
+import { questionType } from "@/types/common";
 
-export const characterConst: characterType = Object.freeze({
-  id: 0,
-  name: "",
-  status: "",
-  species: "",
-  type: "",
-  gender: "",
-  origin: {
-    name: "",
-    url: "",
-  },
-  image: "",
-  episode: [],
+export const questionConst: questionType = Object.freeze({
+  id: null,
+  text: "",
 });

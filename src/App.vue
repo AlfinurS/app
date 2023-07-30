@@ -9,7 +9,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, ref } from "vue";
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
 import FooterComponent from "@/components/FooterComponent.vue";
 import questionsConst from "@/assets/questions.json";
 
@@ -19,8 +20,18 @@ export default defineComponent({
     FooterComponent,
   },
   setup() {
-    const questions = ref(questionsConst.data);
-    provide("questions", questions);
+    const store = useStore();
+    const activeQuestions = computed(
+      () => store.getters["common/activeQuestions"]
+    );
+    const questions = computed(() => store.getters["common/questions"]);
+
+    const initQuestions = () => {
+      store.dispatch("common/setQuestions", questionsConst.data);
+    };
+    initQuestions();
+
+    return { activeQuestions, questions };
   },
 });
 </script>
