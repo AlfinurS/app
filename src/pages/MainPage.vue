@@ -222,6 +222,7 @@ export default defineComponent({
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 8px;
+      width: 100%;
     }
     &-width {
       grid-column-start: 1;
@@ -233,6 +234,7 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     &-wrapp {
+      width: 100%;
       margin-top: 24px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
